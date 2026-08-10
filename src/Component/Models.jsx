@@ -1,13 +1,4 @@
-import { use, useState } from "react"
-
-const Models = ({ modelPromise }) => {
-
-    const models = use(modelPromise)
-    const [subscribedIds, setSubscribedIds] = useState([])
-
-    const handleSubscribe = (id) => {
-        setSubscribedIds(prev => [...prev, id])
-    }
+const Models = ({ models, subscribedIds, handleSubscribe }) => {
 
     return (
         <div className="py-20 max-w-7xl mx-auto px-4 md:px-6">

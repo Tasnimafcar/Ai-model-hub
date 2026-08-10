@@ -1,6 +1,8 @@
 import "../App.css";
 
-const Navbar = ({ page, setPage }) => {
+const Navbar = ({ page, setPage, models, subscribedIds }) => {
+
+    const subscribedCount = subscribedIds.length;
 
     return (
         <div className="navbar sticky top-0 z-50 backdrop-blur-md bg-white/70 shadow-md">
@@ -49,12 +51,20 @@ const Navbar = ({ page, setPage }) => {
             </div>
 
             <div className="navbar-end gap-4">
-                <button className="btn btn-ghost btn-circle">
+                <button
+                    onClick={() => setPage("Cart")}
+                    className="btn btn-ghost btn-circle"
+                >
                     <div className="indicator">
                         <i className="fa-solid fa-cart-shopping text-xl"></i>
-                        {/* <span className="badge badge-sm indicator-item">3</span> */}
+                        {subscribedCount > 0 && (
+                            <span className="badge badge-sm bg-red-500 text-white border-none indicator-item">
+                                {subscribedCount}
+                            </span>
+                        )}
                     </div>
                 </button>
+
                 <button className="blob-btn">
                     Get Started
 

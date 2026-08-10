@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, use } from "react";
 import Navbar from "./component/Navbar";
 import Banner from "./component/Banner";
 import Footer from "./component/Footer";
-import Models from "./component/Models"; 
+import Models from "./component/Models";
+import Cart from "./component/Cart";
 
 const getModels = async () => {
     const res = await fetch("/models.json")
@@ -13,17 +14,33 @@ const modelPromise = getModels()
 
 function App() {
   const [page, setPage] = useState("Home");
+  const models = use(modelPromise);
+  const [subscribedIds, setSubscribedIds] = useState([]);
+
+  const handleSubscribe = (id) => {
+    setSubscribedIds(prev => [...prev, id]);
+  }
+
+  const handleRemove = (id) => {
+    setSubscribedIds(prev => prev.filter(subId => subId !== id));
+  }
 
   return (
    <>
-   <Navbar page={page} setPage={setPage} />
+   <Navbar page={page} setPage={setPage} models={models} subscribedIds={subscribedIds} />
 
-   {page === "Home" ? (
+   {page === "Home" && (
      <>
        <Banner/>
-       <Models modelPromise={modelPromise}/>
+       <Models models={models} subscribedIds={subscribedIds} handleSubscribe={handleSubscribe} />
      </>
-   ) : (
+   )}
+
+   {page === "Cart" && (
+     <Cart models={models} subscribedIds={subscribedIds} handleRemove={handleRemove} setPage={setPage} />
+   )}
+
+   {(page === "About" || page === "Services" || page === "Contact") && (
      <div className="min-h-150 flex flex-col items-center justify-center text-center px-6 bg-linear-to-b from-white to-red-50">
        <div className="text-7xl mb-6">🚧</div>
        <div className="inline-flex items-center gap-2 bg-red-500/10 border border-red-500/30 text-red-500 text-sm font-semibold px-4 py-1.5 rounded-full mb-6">
