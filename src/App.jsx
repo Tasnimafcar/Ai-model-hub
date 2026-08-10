@@ -1,4 +1,5 @@
-import { useState, use } from "react";
+import { useState, use, useEffect } from "react";
+import { motion } from "framer-motion";
 import Navbar from "./component/Navbar";
 import Banner from "./component/Banner";
 import Footer from "./component/Footer";
@@ -11,6 +12,32 @@ const getModels = async () => {
 }
 
 const modelPromise = getModels()
+
+const TypewriterText = ({ text }) => {
+  const [displayedText, setDisplayedText] = useState("");
+
+  useEffect(() => {
+    setDisplayedText("");
+    let index = 0;
+    const interval = setInterval(() => {
+      setDisplayedText(text.slice(0, index + 1));
+      index++;
+      if (index >= text.length) clearInterval(interval);
+    }, 20);
+    return () => clearInterval(interval);
+  }, [text]);
+
+  return (
+    <p className="text-lg text-zinc-500 max-w-md leading-relaxed min-h-24">
+      {displayedText}
+      <motion.span
+        animate={{ opacity: [1, 0] }}
+        transition={{ duration: 0.6, repeat: Infinity, repeatType: "reverse" }}
+        className="inline-block w-0.5 h-5 bg-red-500 ml-0.5 align-middle"
+      />
+    </p>
+  );
+};
 
 function App() {
   const [page, setPage] = useState("Home");
@@ -49,9 +76,7 @@ function App() {
        <h2 className="text-4xl lg:text-5xl font-bold text-zinc-900 mb-4 tracking-tight">
          Coming Soon
        </h2>
-       <p className="text-lg text-zinc-500 max-w-md leading-relaxed">
-         This page is still under construction. This is a practice project, so this section hasn't been built out yet — but Home is ready to explore!
-       </p>
+       <TypewriterText key={page} text={`This page is still under construction. This is a practice project, so this section hasn't been built out yet — but Home is ready to explore!`} />
        <button
          onClick={() => setPage("Home")}
          className="mt-8 bg-red-600 hover:bg-red-500 transition-all px-8 py-3.5 rounded-xl font-semibold text-white shadow-lg shadow-red-500/30 flex items-center gap-2 group"
