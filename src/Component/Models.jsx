@@ -6,7 +6,7 @@ const Models = ({ models, subscribedIds, handleSubscribe, setPage }) => {
 
     const [shakeId, setShakeId] = useState(null);
     const [alertModel, setAlertModel] = useState(null);
-    const [showToast, setShowToast] = useState(false);  
+    const [showToast, setShowToast] = useState(false);
 
     const handleNewSubscribe = (id) => {
         handleSubscribe(id);
@@ -109,8 +109,7 @@ const Models = ({ models, subscribedIds, handleSubscribe, setPage }) => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 30, scale: 0.9 }}
                         transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                        className="fixed bottom-8 left-1/2 -translate-x-1/2 bg-linear-to-b from-[#7A2038] to-[#4B1528] text-white px-6 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 z-100 font-semibold"
-                    >
+                        className="fixed bottom-8 left-1/2 -translate-x-1/2 bg-linear-to-b from-[#7A2038] to-[#4B1528] text-white px-6 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 z-100 font-semibold whitespace-nowrap">
                         <span className="text-xl">✓</span>
                         Added to cart!
                     </motion.div>

@@ -67,7 +67,7 @@ const Navbar = ({ page, setPage, models, subscribedIds }) => {
 
                 </button>
 
-                <button className="blob-btn">
+                <button className="blob-btn hidden md:inline-flex">
                     Get Started
 
                     <span className="blob-btn__inner">
