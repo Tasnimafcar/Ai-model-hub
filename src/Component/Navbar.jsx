@@ -46,7 +46,7 @@ const Navbar = ({ page, setPage, models, subscribedIds }) => {
                 </ul>
             </div>
 
-            <div className="navbar-end gap-4">
+            <div className="navbar-end gap-4 mr-3 md:mr-0">
 
                 <button
                     onClick={() => setPage("Cart")}
