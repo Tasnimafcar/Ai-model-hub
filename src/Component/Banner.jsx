@@ -26,12 +26,13 @@ const Banner = () => {
     },);
 
     return (
-        <div className="relative min-h-162.5 flex items-center overflow-hidden px-6 lg:px-16">
+        <div className="relative min-h-162.5 flex items-center overflow-hidden px-6 lg:px-16 pt-20 lg:pt-0">
             <div className="mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center relative z-10">
 
                 {/* left content */}
                 <div className="space-y-4">
-                    <div className="inline-flex items-center gap-2 bg-red-500/10 border border-red-500/30 text-red-400 text-sm font-medium px-5 py-2 rounded-full">
+
+                    <div className="hidden lg:inline-flex items-center gap-2 bg-red-500/10 border border-red-500/30 text-red-400 text-sm font-medium px-5 py-2 rounded-full">
                         ✨ Frontier AI Models
                     </div>
 
@@ -46,25 +47,27 @@ const Banner = () => {
                     </p>
 
                     <div className="flex flex-wrap gap-4 pt-4">
-                        <button className="bg-red-600 hover:bg-red-500 transition-all px-8 py-4 rounded-2xl font-semibold text-lg text-white shadow-xl shadow-red-500/30 flex items-center gap-3 group">Get Unlimited Access
+                        <button className="bg-red-600 hover:bg-red-500 transition-all px-5 py-3 lg:px-8 lg:py-4 rounded-2xl font-semibold text-base lg:text-lg text-white shadow-xl shadow-red-500/30 flex items-center gap-3 group">Get Unlimited Access
                             <span className="group-hover:translate-x-2 transition-transform duration-300 text-xl">→</span>
                         </button>
                     </div>
-                    <div className="flex items-center gap-8 text-sm text-zinc-600 pt-6">
-                        <div>✓ 50+ Frontier Models</div>
-                        <div>✓ No Usage Limits</div>
-                        <div>✓ Cancel Anytime</div>
+
+                    <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-zinc-600 pt-6">
+                        <div className="whitespace-nowrap">✓ 50+ Frontier Models</div>
+                        <div className="whitespace-nowrap">✓ No Usage Limits</div>
+                        <div className="whitespace-nowrap">✓ Cancel Anytime</div>
                     </div>
+
                 </div>
 
                 {/* right image */}
-                <div className="relative w-full h-122.5 overflow-hidden flex items-center justify-center" style={{ clipPath: "inset(0)" }}>
+                <div className="relative w-full h-56 lg:h-122.5 overflow-hidden flex items-center justify-center" style={{ clipPath: "inset(0)" }}>
                     <AnimatePresence mode="wait">
                         <motion.img
                             key={current}
                             src={images[current]}
                             alt="AI model"
-                            className="h-96 w-auto object-contain"
+                            className="h-48 lg:h-96 w-auto object-contain"
                             initial={{ x: 80, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
                             exit={{ x: -80, opacity: 0 }}

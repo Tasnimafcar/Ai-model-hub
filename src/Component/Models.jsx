@@ -6,12 +6,16 @@ const Models = ({ models, subscribedIds, handleSubscribe, setPage }) => {
 
     const [shakeId, setShakeId] = useState(null);
     const [alertModel, setAlertModel] = useState(null);
+    const [showToast, setShowToast] = useState(false);  
 
     const handleNewSubscribe = (id) => {
         handleSubscribe(id);
-        setPage("Cart");
+        setShowToast(true);
+        setTimeout(() => {
+            setShowToast(false);
+            setPage("Cart");
+        }, 900);
     }
-
     const handleSubscribedClick = (model) => {
         setShakeId(model.id);
         setTimeout(() => {
@@ -23,30 +27,36 @@ const Models = ({ models, subscribedIds, handleSubscribe, setPage }) => {
     return (
         <div className="py-20 max-w-7xl mx-auto px-4 md:px-6">
             <div className="text-center space-y-2">
-                <h2 className="font-bold text-5xl text-black tracking-tighter">Choose Your AI Model</h2>
+                <h2 className="font-bold text-3xl lg:text-5xl tracking-tighter">
+                    Choose Your{" "}
+                    <span className="bg-linear-to-r from-red-500 via-orange-400 to-amber-400 bg-clip-text text-transparent">
+                        AI Model
+                    </span>
+                </h2>
                 <p className="text-gray-400 text-lg">One subscription gives you access to all frontier AI models</p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5 mt-10">
                 {models.map(model => {
                     const isSubscribed = subscribedIds.includes(model.id)
                     return (
-                        <div key={model.id} className="shadow-lg rounded-xl border overflow-hidden border-zinc-300">
-                            <div className="flex justify-center items-center h-56 bg-zinc-200">
-                                <img className="h-40 w-40 object-contain" src={model.image} />
+                        <div key={model.id} className="shadow-lg rounded-xl border overflow-hidden border-zinc-300 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300">
+
+                            <div className="flex justify-center items-center h-28 md:h-56 bg-zinc-200">
+                                <img className="h-20 w-20 md:h-40 md:w-40 object-contain" src={model.image} />
                             </div>
-                            <div className="p-4 flex flex-col justify-between min-h-55">
-                                <div className="space-y-4">
-                                    <h2 className="font-semibold text-2xl">{model.title}</h2>
-                                    <p className="line-clamp-3 min-h-18">{model.description}</p>
-                                    <div className="text-2xl font-bold">${model.price}/Month</div>
+                            <div className="p-2.5 md:p-4 flex flex-col justify-between min-h-0 md:min-h-55">
+                                <div className="space-y-1.5 md:space-y-4">
+                                    <h2 className="font-semibold text-sm md:text-2xl line-clamp-1">{model.title}</h2>
+                                    <p className="hidden md:block line-clamp-3 min-h-18">{model.description}</p>
+                                    <div className="text-base md:text-2xl font-bold">${model.price}/Month</div>
                                 </div>
 
                                 <motion.button
                                     onClick={() => isSubscribed ? handleSubscribedClick(model) : handleNewSubscribe(model.id)}
                                     animate={shakeId === model.id ? { x: [0, -8, 8, -8, 8, -4, 4, 0] } : { x: 0 }}
                                     transition={{ duration: 0.4 }}
-                                    className={`btn w-full py-6 mt-4 font-bold text-white rounded-xl transition-colors ${isSubscribed ? "bg-linear-to-b from-[#7A2038] to-[#4B1528]" : "bg-red-500"}`}
+                                    className={`btn w-full py-2 md:py-6 mt-2 md:mt-4 text-xs md:text-base font-bold text-white rounded-lg md:rounded-xl transition-colors ${isSubscribed ? "bg-linear-to-b from-[#7A2038] to-[#4B1528]" : "bg-red-500"}`}
                                 >
                                     {isSubscribed ? "Subscribed ✓" : "Subscribe Now"}
                                 </motion.button>
@@ -91,6 +101,22 @@ const Models = ({ models, subscribedIds, handleSubscribe, setPage }) => {
                     </motion.div>
                 )}
             </AnimatePresence>
+
+            <AnimatePresence>
+                {showToast && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 30, scale: 0.9 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                        className="fixed bottom-8 left-1/2 -translate-x-1/2 bg-linear-to-b from-[#7A2038] to-[#4B1528] text-white px-6 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 z-100 font-semibold"
+                    >
+                        <span className="text-xl">✓</span>
+                        Added to cart!
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
         </div>
     );
 };
