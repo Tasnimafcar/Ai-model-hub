@@ -25,7 +25,7 @@ const Models = ({ models, subscribedIds, handleSubscribe, setPage }) => {
     }
 
     return (
-        <div className="py-20 max-w-7xl mx-auto px-4 md:px-6">
+        <div id="models-section" className="py-20 max-w-7xl mx-auto px-4 md:px-6 scroll-mt-20">
             <div className="text-center space-y-2">
                 <h2 className="font-bold text-3xl lg:text-5xl tracking-tighter">
                     Choose Your{" "}

@@ -1,11 +1,11 @@
 import { motion, AnimatePresence } from "framer-motion";
-import TypewriterText from "./component/TypewriterText";
+import TypewriterText from "./Component/TypewriterText";
 import { useState, use, useEffect } from "react";
-import Navbar from "./component/Navbar";
-import Banner from "./component/Banner";
-import Footer from "./component/Footer";
-import Models from "./component/Models";
-import Cart from "./component/Cart";
+import Navbar from "./Component/Navbar";
+import Banner from "./Component/Banner";
+import Footer from "./Component/Footer";
+import Models from "./Component/Models";
+import Cart from "./Component/Cart";
 
 const getModels = async () => {
   const res = await fetch("/models.json")

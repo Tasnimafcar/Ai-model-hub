@@ -64,7 +64,7 @@ const Navbar = ({ page, setPage, models, subscribedIds }) => {
                             </span>
                         )}
                     </div>
-                    
+
                 </button>
 
                 <button className="blob-btn">
@@ -91,7 +91,7 @@ const Navbar = ({ page, setPage, models, subscribedIds }) => {
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
                                 onClick={() => setIsMenuOpen(false)}
-                                className="fixed inset-0 bg-black/50 `z-9998` md:hidden"
+                                className="fixed inset-0 bg-black/50 z-9998 md:hidden"
                             />
 
                             <motion.div
